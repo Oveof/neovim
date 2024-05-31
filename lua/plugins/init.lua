@@ -1,7 +1,7 @@
 
 return {
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-  { "nvim-treesitter/nvim-treesitter", name = "treesitter"},
+  { "nvim-treesitter/nvim-treesitter", name = "treesitter", defaults = {lazy=false}},
   { "theprimeagen/harpoon" },
   {     
     'nvim-telescope/telescope.nvim', tag = '0.1.5',
@@ -50,15 +50,6 @@ return {
             "nvim-lua/plenary.nvim",
         },
     },
-    {
-  'stevearc/aerial.nvim',
-  opts = {},
-  -- Optional dependencies
-  dependencies = {
-     "nvim-treesitter/nvim-treesitter",
-     "nvim-tree/nvim-web-devicons"
-  },
-},
 {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
@@ -66,5 +57,104 @@ return {
     -- use opts = {} for passing setup options
     -- this is equalent to setup({}) function
 },
+{
+	"quarto-dev/quarto-nvim"
+},
+{
+	"GCBallesteros/jupytext.nvim"
+},
+{
+	"jmbuhr/otter.nvim"
+},
+{
+  "epwalsh/obsidian.nvim",
+  version = "*",  -- recommended, use latest release instead of latest commit
+  lazy = true,
+  ft = "markdown",
+  -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+  -- event = {
+  --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+  --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+  --   "BufReadPre path/to/my-vault/**.md",
+  --   "BufNewFile path/to/my-vault/**.md",
+  -- },
+  dependencies = {
+    -- Required.
+    "nvim-lua/plenary.nvim",
 
+    -- see below for full list of optional dependencies 👇
+  },
+  opts = {
+    workspaces = {
+      {
+        name = "coppermind",
+        path = "~/coppermind",
+        overrides = {
+            notes_subdir = "+ Encounters",
+        },
+      },
+
+    -- see below for full list of options 👇
+    },
+    templates = {
+        folder = "Extras/Templates"
+    },
+    notes_subdir = "+ Encounters",
+    disable_frontmatter = true,
+  }
+},
+{
+	"ray-x/lsp_signature.nvim",
+	  event = "VeryLazy",
+	  opts = {},
+	  config = function(_, opts) require'lsp_signature'.setup(opts) end
+},
+{
+  "ibhagwan/fzf-lua",
+  -- optional for icon support
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  config = function()
+    -- calling `setup` is optional for customization
+    require("fzf-lua").setup({})
+  end
+},
+{
+	"averms/black-nvim"
+},
+{
+	"python-lsp/python-lsp-black"
+},
+{
+    'cameron-wags/rainbow_csv.nvim',
+    config = true,
+    ft = {
+        'csv',
+        'tsv',
+        'csv_semicolon',
+        'csv_whitespace',
+        'csv_pipe',
+        'rfc_csv',
+        'rfc_semicolon'
+    },
+    cmd = {
+        'RainbowDelim',
+        'RainbowDelimSimple',
+        'RainbowDelimQuoted',
+        'RainbowMultiDelim'
+    }
+},
+{
+	"ahmedkhalf/project.nvim"
+},
+{
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
+},
+{
+    'numToStr/Comment.nvim',
+    opts = {
+        -- add any options here
+    },
+    lazy = false,
+}
 }
